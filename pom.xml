@@ -67,30 +67,32 @@
 
   <build>
     <finalName>scriptManager</finalName>
-    <!---->
-    <!--<resources>-->
-      <!--<resource>-->
-        <!--<directory>src/test/resources</directory>-->
-        <!--<filtering>true</filtering>-->
-      <!--</resource>-->
-    <!--</resources>-->
-  <!--</build>-->
+    <resources>
+      <resource>
+        <directory>src/test/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-5</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <archive>
-            <manifest>
-              <!-- 这里配置你的程序入口main -->
-              <mainClass>com.tinafu.App</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
+          <mainClass>com.tinafu.App</mainClass>
+          <layout>ZIP</layout>
+          <includes>
+            <!--exclude all extends lib jar-->
+            <include>
+              <groupId>nothing</groupId>
+              <artifactId>nothing</artifactId>
+            </include>
+          </includes>
         </configuration>
+        <executions>
+          <execution>
+            <goals><goal>repackage</goal></goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
