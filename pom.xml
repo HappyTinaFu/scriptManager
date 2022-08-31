@@ -67,11 +67,31 @@
 
   <build>
     <finalName>scriptManager</finalName>
-    <resources>
-      <resource>
-        <directory>src/test/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
+    <!---->
+    <!--<resources>-->
+      <!--<resource>-->
+        <!--<directory>src/test/resources</directory>-->
+        <!--<filtering>true</filtering>-->
+      <!--</resource>-->
+    <!--</resources>-->
+  <!--</build>-->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.2-beta-5</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <!-- 这里配置你的程序入口main -->
+              <mainClass>com.tinafu.App</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
