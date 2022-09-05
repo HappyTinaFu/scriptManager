@@ -63,8 +63,8 @@ public class PythonScriptManagerTest {
         executor.setStreamHandler(streamHandler);
 
         int exitCode = executor.execute(cmdLine);
-        assertEquals("No errors should be detected", 0, exitCode);
-        LOGGER.info("result: {}",outputStream.toString());
+        ExcuterResult result = new ExcuterResult(exitCode,outputStream.toString());
+        LOGGER.info("result: {}",result);
         LOGGER.info(("apacheCommonExecMode finish in " + (System.currentTimeMillis() - start) + "ms"));
     }
 
@@ -94,6 +94,40 @@ public class PythonScriptManagerTest {
     private String resolvePythonScriptPath(String filename) {
         File file = new File("src/test/resources/" + filename);
         return file.getAbsolutePath();
+    }
+
+    public class ExcuterResult{
+        private int exitCode;
+        private String result;
+
+        public ExcuterResult(int exitCode, String result) {
+            this.exitCode = exitCode;
+            this.result = result;
+        }
+
+        public int getExitCode() {
+            return exitCode;
+        }
+
+        public void setExitCode(int exitCode) {
+            this.exitCode = exitCode;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+        @Override
+        public String toString() {
+            return "ExcuterResult{" +
+                    "exitCode=" + exitCode +
+                    ", result='" + result + '\'' +
+                    '}';
+        }
     }
 
 }
